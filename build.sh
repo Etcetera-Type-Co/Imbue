@@ -12,11 +12,6 @@ fontmake -g Imbue.glyphs -i -o ttf --output-dir ../fonts/static/ttf/
 mkdir -p ../fonts/static/otf
 fontmake -g Imbue.glyphs -i -o otf --output-dir ../fonts/static/otf/
 
-#echo "Generating VFs"
-#fontmake -g Imbue.glyphs -o variable --output-path ../fonts/Imbue[slnt,wght].ttf
-
-
-
 
 
 
@@ -25,18 +20,16 @@ cd ..
 # ============================================================================
 # Autohinting ================================================================
 
-statics=$(ls fonts/static/ttf/*.ttf)
-echo hello
-for file in $statics; do
-    echo "fix DSIG in " ${file}
-    gftools fix-dsig --autofix ${file}
 
-    echo "TTFautohint " ${file}
-    # autohint with detailed info
-    hintedFile=${file/".ttf"/"-hinted.ttf"}
-    ttfautohint -I ${file} ${hintedFile}
-    cp ${hintedFile} ${file}
-    rm -rf ${hintedFile}
+echo "Post processing TTFs"
+ttfs=$(ls fonts/static/ttf/*.ttf)
+for ttf in $ttfs
+do
+	gftools fix-dsig -f $ttf;
+	ttfautohint $ttf $ttf.fix
+	mv "$ttf.fix" $ttf;
+	gftools fix-hinting $ttf
+	mv "$ttf.fix" $ttf;
 done
 
 
@@ -81,29 +74,19 @@ cd sources
 
 echo "Generating VFs"
 mkdir -p ../fonts/variable
-fontmake -g Imbue.glyphs -o variable --output-path ../fonts/variable/ImbueVariable.ttf
+fontmake -g Imbue.glyphs -o variable --output-path ../fonts/variable/Imbue[opsz,wght].ttf
 
 rm -rf master_ufo/ instance_ufo/
 
 
 cd ../fonts/variable
 
-woff2_compress ImbueVariable.ttf
+woff2_compress Imbue[opsz,wght].ttf
 
 cd ..
 
-echo "Post processing"
 
-
-ttfs=$(ls ../fonts/static/ttf/*.ttf)
-echo $ttfs
-for ttf in $ttfs
-do
-	gftools fix-dsig -f $ttf;
-	gftools fix-nonhinting $ttf $ttf.fix;
-	mv "$ttf.fix" $ttf;
-done
-rm ../fonts/static/ttf/*gasp.ttf
+echo "Post processing VFs"
 
 vfs=$(ls ../fonts/variable/*.ttf)
 for vf in $vfs
@@ -119,3 +102,5 @@ do
 	rm ../fonts/variable/*.ttx
 done
 rm ../fonts/variable/*gasp.ttf
+
+echo "Complete"

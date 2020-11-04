@@ -1,5 +1,8 @@
 {
 .appVersion = "1349";
+DisplayStrings = (
+"tgpH/gravecomb.case À\012pHerio"
+);
 classes = (
 {
 automatic = 1;
@@ -65,7 +68,7 @@ name = "Variable Font Origin";
 value = "2224527B-843E-45D0-ACBE-AC9678FC6685";
 }
 );
-date = "2020-10-30 16:42:17 +0000";
+date = "2020-11-04 14:13:24 +0000";
 designer = "Tyler Finck";
 designerURL = "https://www.tylerfinck.com";
 disablesNiceNames = 1;
@@ -743,53 +746,36 @@ capHeight = 1400;
 custom = "100pt Thin";
 customParameters = (
 {
-name = typoLineGap;
-value = 100;
-},
-{
-name = hheaLineGap;
-value = 100;
-},
-{
 name = typoAscender;
-value = 1520;
+value = 1900;
 },
 {
 name = hheaAscender;
-value = 1520;
-},
-{
-name = winAscent;
-value = 1980;
+value = 1900;
 },
 {
 name = hheaDescender;
-value = -510;
+value = -500;
 },
 {
 name = typoDescender;
-value = -510;
+value = -500;
+},
+{
+name = typoLineGap;
+value = 0;
+},
+{
+name = hheaLineGap;
+value = 0;
+},
+{
+name = winAscent;
+value = 2020;
 },
 {
 name = winDescent;
 value = 540;
-},
-{
-name = smallCapHeight;
-value = 1232;
-},
-{
-name = "Axis Location";
-value = (
-{
-Axis = Weight;
-Location = 100;
-},
-{
-Axis = "Optical size";
-Location = 100;
-}
-);
 }
 );
 descender = -500;
@@ -817,53 +803,36 @@ capHeight = 1400;
 custom = "100pt Black";
 customParameters = (
 {
-name = typoLineGap;
-value = 100;
-},
-{
-name = hheaLineGap;
-value = 100;
-},
-{
 name = typoAscender;
-value = 1520;
+value = 1900;
 },
 {
 name = hheaAscender;
-value = 1520;
-},
-{
-name = winAscent;
-value = 1980;
+value = 1900;
 },
 {
 name = hheaDescender;
-value = -510;
+value = -500;
 },
 {
 name = typoDescender;
-value = -510;
+value = -500;
+},
+{
+name = typoLineGap;
+value = 0;
+},
+{
+name = hheaLineGap;
+value = 0;
+},
+{
+name = winAscent;
+value = 2020;
 },
 {
 name = winDescent;
 value = 540;
-},
-{
-name = smallCapHeight;
-value = 1232;
-},
-{
-name = "Axis Location";
-value = (
-{
-Axis = Weight;
-Location = 900;
-},
-{
-Axis = "Optical size";
-Location = 100;
-}
-);
 }
 );
 descender = -500;
@@ -892,53 +861,36 @@ capHeight = 1400;
 custom = Thin;
 customParameters = (
 {
-name = typoLineGap;
-value = 100;
-},
-{
-name = hheaLineGap;
-value = 100;
-},
-{
 name = typoAscender;
-value = 1520;
+value = 1900;
 },
 {
 name = hheaAscender;
-value = 1520;
-},
-{
-name = winAscent;
-value = 1980;
+value = 1900;
 },
 {
 name = hheaDescender;
-value = -510;
+value = -500;
 },
 {
 name = typoDescender;
-value = -510;
+value = -500;
+},
+{
+name = typoLineGap;
+value = 0;
+},
+{
+name = hheaLineGap;
+value = 0;
+},
+{
+name = winAscent;
+value = 2020;
 },
 {
 name = winDescent;
 value = 540;
-},
-{
-name = smallCapHeight;
-value = 1232;
-},
-{
-name = "Axis Location";
-value = (
-{
-Axis = Weight;
-Location = 100;
-},
-{
-Axis = "Optical size";
-Location = 10;
-}
-);
 }
 );
 descender = -500;
@@ -966,53 +918,36 @@ capHeight = 1400;
 custom = Black;
 customParameters = (
 {
-name = typoLineGap;
-value = 100;
-},
-{
-name = hheaLineGap;
-value = 100;
-},
-{
 name = typoAscender;
-value = 1520;
+value = 1900;
 },
 {
 name = hheaAscender;
-value = 1520;
-},
-{
-name = winAscent;
-value = 1980;
+value = 1900;
 },
 {
 name = hheaDescender;
-value = -510;
+value = -500;
 },
 {
 name = typoDescender;
-value = -510;
+value = -500;
+},
+{
+name = typoLineGap;
+value = 0;
+},
+{
+name = hheaLineGap;
+value = 0;
+},
+{
+name = winAscent;
+value = 2020;
 },
 {
 name = winDescent;
 value = 540;
-},
-{
-name = smallCapHeight;
-value = 1232;
-},
-{
-name = "Axis Location";
-value = (
-{
-Axis = Weight;
-Location = 900;
-},
-{
-Axis = "Optical size";
-Location = 10;
-}
-);
 }
 );
 descender = -500;
@@ -99940,8 +99875,8 @@ rightMetricsKey = macronbelowcomb;
 },
 {
 color = 6;
-glyphname = strokeshortoverlaycomb;
-lastChange = "2020-11-04 12:52:33 +0000";
+glyphname = strokeshortcomb;
+lastChange = "2020-11-04 14:08:39 +0000";
 layers = (
 {
 anchors = (
@@ -100034,8 +99969,8 @@ unicode = 0335;
 },
 {
 color = 6;
-glyphname = strokelongoverlaycomb;
-lastChange = "2020-11-04 12:52:33 +0000";
+glyphname = strokelongcomb;
+lastChange = "2020-11-04 14:08:52 +0000";
 layers = (
 {
 anchors = (
@@ -106652,5 +106587,5 @@ GSDimensionPlugin.Dimensions = {
 };
 };
 versionMajor = 1;
-versionMinor = 101;
+versionMinor = 102;
 }

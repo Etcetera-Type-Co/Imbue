@@ -1,75 +1,64 @@
 #!/bin/sh
 set -e
+#source ../env/bin/activate
 
-mkdir -p ./fonts ./fonts/static/ttf ./fonts/static/otf ./fonts/variable
+fontName="Imbue"
+axes="opsz,wght"
 
-echo "Generating VFs"
-fontmake -g Sources/Imbue.glyphs -o variable --output-path ./fonts/variable/Imbue[opsz,wght].ttf
+##########################################
 
-echo "Post processing VFs"
-for ttf in ./fonts/variable/*.ttf
+echo ".
+GENERATING VARIABLE
+."
+VF_DIR=../fonts/variable
+rm -rf $VF_DIR
+mkdir -p $VF_DIR
+
+fontmake -g $fontName.glyphs --family-name $fontName -o variable --output-path $VF_DIR/$fontName[$axes].ttf
+
+##########################################
+
+echo ".
+POST-PROCESSING VF
+."
+vfs=$(ls $VF_DIR/*.ttf)
+for font in $vfs
 do
-	gftools fix-dsig --autofix $ttf;
-	gftools fix-nonhinting $ttf "$ttf.fix";
-	mv "$ttf.fix" $ttf;
-	gftools fix-unwanted-tables --tables MVAR $ttf
-	gftools fix-vf-meta $ttf;
-	mv "$ttf.fix" $ttf;
-	woff2_compress $ttf
-
+	gftools fix-dsig --autofix $font
+	gftools fix-nonhinting $font $font.fix
+	mv $font.fix $font
+	gftools fix-unwanted-tables --tables MVAR $font
 done
+rm $VF_DIR/*gasp*
 
-rm ./fonts/variable/*gasp*
+python gen_stat.py $VF_DIR/$fontName[$axes].ttf
 
+##########################################
 
-echo "Generating Static fonts"
-fontmake -g Sources/Imbue.glyphs -i -o ttf --output-dir ./fonts/static/ttf/
+echo ".
+GENERATING STATIC TTF
+."
+TT_DIR=../fonts/ttf
+rm -rf $TT_DIR
+mkdir -p $TT_DIR
 
-fontmake -g Sources/Imbue.glyphs -i -o otf --output-dir ./fonts/static/otf/
+fontmake -g $fontName.glyphs --family-name "$fontName 10pt" -i -o ttf --output-dir $TT_DIR
+fontmake -g $fontName.glyphs --family-name "$fontName 50pt" -i -o ttf --output-dir $TT_DIR
+fontmake -g $fontName.glyphs --family-name "$fontName 100pt" -i -o ttf --output-dir $TT_DIR
 
+##########################################
 
-echo "Post processing TTFs"
-ttfs=$(ls ./fonts/static/ttf/*.ttf)
-for ttf in $ttfs
+echo ".
+POST-PROCESSING TTF
+."
+ttfs=$(ls $TT_DIR/*.ttf)
+for font in $ttfs
 do
-	gftools fix-dsig -f $ttf;
-	ttfautohint $ttf $ttf.fix
-	[ -f $ttf.fix ] && mv $ttf.fix $ttf
-	gftools fix-hinting $ttf
-	[ -f $ttf.fix ] && mv $ttf.fix $ttf
-done
-
-
-echo "Post processing OTFs"
-otfs=$(ls ./fonts/static/otf/*.otf)
-for otf in $otfs
-do
-	gftools fix-dsig -f $otf
-done
-
-
-echo "Building webfonts"
-rm -rf ./fonts/web/woff2
-ttfs=$(ls ./fonts/static/ttf/*.ttf)
-for ttf in $ttfs; do
-    woff2_compress $ttf
-done
-mkdir -p ./fonts/web/woff2
-woff2s=$(ls ./fonts/static/*/*.woff2)
-for woff2 in $woff2s; do
-    mv $woff2 ./fonts/web/woff2/$(basename $woff2)
-done
-
-rm -rf ./fonts/web/woff
-ttfs=$(ls ./fonts/static/ttf/*.ttf)
-for ttf in $ttfs; do
-    sfnt2woff-zopfli $ttf
-done
-
-mkdir -p ./fonts/web/woff
-woffs=$(ls ./fonts/static/*/*.woff)
-for woff in $woffs; do
-    mv $woff ./fonts/web/woff/$(basename $woff)
+	gftools fix-dsig --autofix $font
+	python -m ttfautohint $font $font.fix
+	[ -f $font.fix ] && mv $font.fix $font
+	gftools fix-hinting $font
+	[ -f $font.fix ] && mv $font.fix $font
 done
 
 rm -rf master_ufo/ instance_ufo/

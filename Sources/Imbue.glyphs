@@ -1,5 +1,5 @@
 {
-.appVersion = "1349";
+.appVersion = "1350";
 classes = (
 {
 automatic = 1;
@@ -105008,20 +105008,6 @@ interpolationWidth = 50;
 instanceInterpolations = {
 "42FCB8D3-5141-4304-9365-2E27830BD286" = 0.55556;
 "A4F0BE09-87B8-499B-8BA0-E8BD95093B86" = 0.44444;
-};
-name = Black;
-weightClass = Black;
-},
-{
-customParameters = (
-{
-name = familyName;
-value = "Imbue 100pt";
-}
-);
-interpolationWeight = 900;
-instanceInterpolations = {
-"A4F0BE09-87B8-499B-8BA0-E8BD95093B86" = 1;
 };
 name = Black;
 weightClass = Black;
